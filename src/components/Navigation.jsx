@@ -1,39 +1,33 @@
 
+
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
-    console.log("Scrolling to:", sectionId); // Debug log
-    const element = document.getElementById(sectionId);
-    element?.scrollIntoView({ behavior: "smooth" });
-    // Close mobile menu after navigation
-    setIsMobileMenuOpen(false);
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      setIsMobileMenuOpen(false); // Close after scroll
+    }
   };
-
-  const toggleMobileMenu = () => {
-    console.log("Toggle menu clicked, current state:", isMobileMenuOpen); // Debug log
-    setIsMobileMenuOpen(!isMobileMenuOpen);
-  };
-
-  const navigationItems = ["about", "skills", "experience", "projects", "contact"];
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled ? "bg-slate-900/95 backdrop-blur-sm shadow-lg" : "bg-transparent"
-    }`}>
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-slate-900/95 backdrop-blur-sm shadow-lg"
+          : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto px-4 sm:px-6 py-4">
         <div className="flex justify-between items-center">
           <button
@@ -42,10 +36,10 @@ const Navigation = () => {
           >
             Portfolio
           </button>
-          
-          {/* Desktop Navigation */}
+
+          {/* Desktop Nav */}
           <div className="hidden md:flex space-x-6 lg:space-x-8">
-            {navigationItems.map((item) => (
+            {["about", "skills", "experience", "projects", "contact"].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item)}
@@ -55,51 +49,52 @@ const Navigation = () => {
               </button>
             ))}
           </div>
-          
-          {/* Mobile Menu */}
-          <div className="md:hidden">
-            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-              <SheetTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="text-gray-300 hover:text-white hover:bg-slate-800/50 p-2 z-50"
-                  onClick={toggleMobileMenu}
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                  </svg>
-                </Button>
-              </SheetTrigger>
-              <SheetContent 
-                side="right" 
-                className="w-[300px] sm:w-[350px] bg-slate-900 border-slate-700 z-[100] opacity-100"
-                style={{ zIndex: 100 }}
+
+          {/* Mobile Hamburger */}
+          <div className="md:hidden z-[60]">
+            <button
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="text-gray-300 hover:text-white focus:outline-none"
+            >
+              <svg
+                className="w-6 h-6 transition-all duration-300"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
               >
-                <div className="flex flex-col space-y-4 mt-8 opacity-100">
-                  <button
-                    onClick={() => scrollToSection("hero")}
-                    className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent text-left opacity-100"
-                  >
-                    Portfolio
-                  </button>
-                  <div className="border-t border-slate-700 pt-4 opacity-100">
-                    {navigationItems.map((item) => (
-                      <button
-                        key={item}
-                        onClick={() => scrollToSection(item)}
-                        className="block w-full text-left py-3 px-2 text-lg capitalize text-gray-300 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors duration-200 opacity-100"
-                      >
-                        {item}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={
+                    isMobileMenuOpen
+                      ? "M6 18L18 6M6 6l12 12" // X icon
+                      : "M4 6h16M4 12h16M4 18h16" // Hamburger icon
+                  }
+                />
+              </svg>
+            </button>
           </div>
         </div>
       </div>
+<div
+  className={`absolute right-4 top-16 w-52 bg-slate-900/95 text-white rounded-lg shadow-xl border border-slate-700 backdrop-blur-md transition-opacity duration-300 md:hidden z-50 ${
+    isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+  }`}
+>
+  <div className="flex flex-col p-4 space-y-3">
+    {["about", "skills", "experience", "projects", "contact"].map((item) => (
+      <button
+        key={item}
+        onClick={() => scrollToSection(item)}
+        className="capitalize text-left hover:text-blue-400 transition"
+      >
+        {item}
+      </button>
+    ))}
+  </div>
+</div>
+
     </nav>
   );
 };
