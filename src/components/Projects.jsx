@@ -67,7 +67,7 @@ const Projects = () => {
                   <h4 className="text-xs sm:text-sm font-semibold text-gray-300 mb-2">Key Features:</h4>
                   <div className="flex flex-wrap gap-1">
                     {project.features.map((feature) => (
-                      <Badge key={feature} variant="outline" className="border-blue-500/50 text-blue-300 text-xs">
+                      <Badge key={feature} variant="outline" className="border-blue-500/50 text-blue-300 text-xs p-[0.2rem]">
                         {feature}
                       </Badge>
                     ))}

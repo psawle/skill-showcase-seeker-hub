@@ -114,7 +114,7 @@ const Contact = () => {
                 </div>
                 <Button 
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3"
+                  className="w-full flex bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white py-3"
                 >
                   <Send size={18} className="mr-2" />
                   Send Message

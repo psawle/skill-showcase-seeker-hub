@@ -50,7 +50,7 @@ const Skills = () => {
                     <Badge 
                       key={skill} 
                       variant="secondary" 
-                      className="bg-slate-700 text-gray-300 hover:bg-slate-600 transition-colors duration-200 text-xs sm:text-sm"
+                      className="bg-slate-700 text-gray-300 hover:bg-slate-600 transition-colors duration-200 text-xs sm:text-sm p-[0.2rem]"
                     >
                       {skill}
                     </Badge>
