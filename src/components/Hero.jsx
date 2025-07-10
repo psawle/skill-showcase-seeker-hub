@@ -20,7 +20,7 @@ const Hero = () => {
             Developer
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 sm:mb-8 leading-relaxed px-4">
-            Passionate Full-Stack Developer with 2 years of experience crafting 
+            Passionate Full-Stack Developer with experience in crafting 
             modern web applications using MongoDB, Express.js, React, and Node.js
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 sm:mb-12 px-4">

@@ -24,7 +24,7 @@ const About = () => {
                   <h3 className="text-lg sm:text-xl font-semibold text-white">Professional Journey</h3>
                 </div>
                 <p className="text-sm sm:text-base text-gray-300 leading-relaxed">
-                  With 2 years of hands-on experience in full-stack development, I've successfully 
+                  With hands-on experience in full-stack development, I've successfully 
                   delivered multiple web applications from concept to deployment. My expertise spans 
                   across modern JavaScript frameworks and backend technologies.
                 </p>
