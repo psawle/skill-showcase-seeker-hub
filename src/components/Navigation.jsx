@@ -16,10 +16,16 @@ const Navigation = () => {
   }, []);
 
   const scrollToSection = (sectionId) => {
+    console.log("Scrolling to:", sectionId); // Debug log
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: "smooth" });
     // Close mobile menu after navigation
     setIsMobileMenuOpen(false);
+  };
+
+  const toggleMobileMenu = () => {
+    console.log("Toggle menu clicked, current state:", isMobileMenuOpen); // Debug log
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const navigationItems = ["about", "skills", "experience", "projects", "contact"];
@@ -54,13 +60,18 @@ const Navigation = () => {
           <div className="md:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <button className="text-gray-300 hover:text-white">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="text-gray-300 hover:text-white hover:bg-slate-800/50 p-2"
+                  onClick={toggleMobileMenu}
+                >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                   </svg>
-                </button>
+                </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[350px]">
+              <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-slate-900 border-slate-700">
                 <div className="flex flex-col space-y-4 mt-8">
                   <button
                     onClick={() => scrollToSection("hero")}
@@ -68,12 +79,12 @@ const Navigation = () => {
                   >
                     Portfolio
                   </button>
-                  <div className="border-t border-gray-200 pt-4">
+                  <div className="border-t border-slate-700 pt-4">
                     {navigationItems.map((item) => (
                       <button
                         key={item}
                         onClick={() => scrollToSection(item)}
-                        className="block w-full text-left py-3 px-2 text-lg capitalize hover:bg-gray-100 rounded-md transition-colors duration-200"
+                        className="block w-full text-left py-3 px-2 text-lg capitalize text-gray-300 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors duration-200"
                       >
                         {item}
                       </button>
