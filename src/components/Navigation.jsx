@@ -63,7 +63,7 @@ const Navigation = () => {
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="text-gray-300 hover:text-white hover:bg-slate-800/50 p-2"
+                  className="text-gray-300 hover:text-white hover:bg-slate-800/50 p-2 z-50"
                   onClick={toggleMobileMenu}
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,20 +71,24 @@ const Navigation = () => {
                   </svg>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[350px] bg-slate-900 border-slate-700">
-                <div className="flex flex-col space-y-4 mt-8">
+              <SheetContent 
+                side="right" 
+                className="w-[300px] sm:w-[350px] bg-slate-900 border-slate-700 z-[100] opacity-100"
+                style={{ zIndex: 100 }}
+              >
+                <div className="flex flex-col space-y-4 mt-8 opacity-100">
                   <button
                     onClick={() => scrollToSection("hero")}
-                    className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent text-left"
+                    className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent text-left opacity-100"
                   >
                     Portfolio
                   </button>
-                  <div className="border-t border-slate-700 pt-4">
+                  <div className="border-t border-slate-700 pt-4 opacity-100">
                     {navigationItems.map((item) => (
                       <button
                         key={item}
                         onClick={() => scrollToSection(item)}
-                        className="block w-full text-left py-3 px-2 text-lg capitalize text-gray-300 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors duration-200"
+                        className="block w-full text-left py-3 px-2 text-lg capitalize text-gray-300 hover:text-white hover:bg-slate-800/50 rounded-md transition-colors duration-200 opacity-100"
                       >
                         {item}
                       </button>
