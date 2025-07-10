@@ -8,13 +8,14 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+const isProd = import.meta.env.MODE === "production";
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename={"production" ? "/skill-showcase-seeker-hub" : "/"}>
+      <BrowserRouter basename={isProd ? "/skill-showcase-seeker-hub" : "/"}>
         <Routes>
           <Route path="/" element={<Index />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
